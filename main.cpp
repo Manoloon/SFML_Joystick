@@ -85,7 +85,6 @@ int main()
         timeSinceLastTick += tickClock.restart();
         while (timeSinceLastTick > timePerFrame)
         {
-           timeSinceLastTick -=timePerFrame;
            //update the position of the square according to input from joystick
            //CHECK DEAD ZONES - OTHERWISE INPUT WILL RESULT IN JITTERY MOVEMENTS WHEN NO INPUT IS PROVIDED
            //INPUT RANGES FROM -100 TO 100
@@ -96,6 +95,9 @@ int main()
               square.move(turbo*speed.x*timePerFrame.asSeconds(),turbo*speed.y*timePerFrame.asSeconds());
               square.setRotation(turbo*speed.x*timePerFrame.asSeconds());
            }
+            timeSinceLastTick -=timePerFrame;
+           std::cout << "Time since : " << std::to_string(timeSinceLastTick.asMilliseconds()) <<
+           std::endl;
         }
         window.clear(sf::Color(128,32,19));
         window.draw(square);
